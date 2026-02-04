@@ -1,0 +1,65 @@
+<mat-dialog-content class="modal-content">
+  <h2 mat-dialog-title class="modal-title">Fazer uma Doação</h2>
+  <form [formGroup]="donationForm" (ngSubmit)="submitDonation()">
+    <div fxLayout="column" fxLayoutGap="16px">
+      <!-- Valor da doação -->
+      <mat-form-field appearance="outline">
+        <mat-label>Valor da Doação (R$)</mat-label>
+        <!-- Alterar de number para text para suportar a máscara -->
+        <input matInput type="text" formControlName="amount" placeholder="Digite o valor da doção em reais" type="text"
+          (input)="formatCurrencyInput($event, 'amount')">
+        <mat-error *ngIf="donationForm.get('amount')?.hasError('required')">
+          O valor é obrigatório
+        </mat-error>
+           <!--  <mat-error *ngIf="donationForm.get('amount')?.hasError('min')">
+          O valor mínimo é R$1,00
+        </mat-error> -->
+        <mat-error *ngIf="donationForm.get('amount')?.hasError('pattern')">
+          Digite um valor monetário válido (ex: 1.000,00)
+        </mat-error>
+        <mat-error *ngIf="donationForm.get('amount')?.hasError('maxlength')">
+          O valor não pode exceder 20 caracteres
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Nome do doador -->
+      <mat-form-field appearance="outline">
+        <mat-label>Nome (opcional)</mat-label>
+        <input matInput formControlName="donorName" maxlength="100">
+      </mat-form-field>
+
+      <!-- CPF do doador -->
+      <mat-form-field appearance="outline">
+        <mat-label>CPF</mat-label>
+        <input matInput formControlName="cpf" mask="000.000.000-00" placeholder="000.000.000-00" required />
+        <mat-icon matSuffix>badge</mat-icon>
+        <mat-error *ngIf="donationForm.get('cpf')?.hasError('required')">
+          CPF é obrigatório
+        </mat-error>
+        <mat-error *ngIf="donationForm.get('cpf')?.hasError('pattern')">
+          CPF inválido (formato: 000.000.000-00)
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Toggle de anonimato -->
+      <mat-slide-toggle formControlName="anonymouse" color="primary" aria-label="Doar anonimamente">
+        Doar de forma anônima
+      </mat-slide-toggle>
+
+      <!-- Mensagem -->
+      <mat-form-field appearance="outline">
+        <mat-label>Mensagem (opcional)</mat-label>
+        <textarea matInput formControlName="message" rows="4" maxlength="250"></textarea>
+        <mat-hint>{{ donationForm.get('message')?.value?.length || 0 }}/250</mat-hint>
+      </mat-form-field>
+
+      <!-- Botões -->
+      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+        <button mat-button mat-dialog-close type="button">Cancelar</button>
+        <button mat-raised-button color="accent" type="submit" [disabled]="donationForm.invalid">
+          Confirmar Doação
+        </button>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>

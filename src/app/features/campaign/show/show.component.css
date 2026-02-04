@@ -1,0 +1,383 @@
+/* Estilos melhorados */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+   padding-top: 64px; /* Altura da toolbar, pode ajustar se necessário */
+}
+
+.toolbar-content {
+  width: 100%;
+  padding: 0 16px;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+}
+
+.login-button {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.donation-card {
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.donation-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.donation-subtitle {
+  margin-bottom: 16px;
+}
+
+.image-container {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.donation-image {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.valor-arrecadado {
+  font-size: 2rem;
+  font-weight: 800;
+  /* color: #3f51b5; */
+  color: #4caf50; /* tom de verde positivo */
+  margin: 8px 0;
+}
+
+.valor-meta {
+  color: rgba(0, 0, 0, 0.6);
+  margin: 4px 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.doadores {
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 8px 0;
+}
+
+.progress-container {
+  position: relative;
+  margin: 24px 0;
+}
+
+.progress-text-overlay {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.progress-percent {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.progress-label {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.donate-button {
+  /*margin-top: 16px;
+  padding: 8px 24px;
+  font-size: 1rem;*/
+
+
+  margin-top: 24px;
+  padding: 12px 32px;
+  font-size: 1.2rem;
+  background: linear-gradient(90deg, #ff4081, #f50057);
+  color: white;
+  border-radius: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.divider {
+  margin: 24px 0;
+}
+
+.creator-section {
+  padding: 8px 0;
+}
+
+.creator-label {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.creator-name {
+  font-weight: 500;
+}
+
+.description-section, .donors-section {
+  padding: 8px 0;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.donation-text {
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.donors-list {
+  padding: 0;
+}
+
+.donor-item {
+  height: 64px;
+}
+
+.donation-detail {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.show-more {
+  margin-top: 8px;
+}
+
+.loading-container {
+  height: 50vh;
+}
+
+.loading-text {
+  margin-top: 16px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .main-content {
+    padding: 16px;
+  }
+  
+  .donation-card {
+    padding: 16px;
+  }
+  
+  .donation-title {
+    font-size: 1.5rem;
+  }
+}
+
+.progress-bar {
+  height: 20px;
+  border-radius: 10px;
+  margin-top: 16px;
+}
+
+.creator-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #3f51b5;
+}
+.creator-label {
+  font-weight: 600;
+  color: #3f51b5;
+}
+.creator-name {
+  font-size: 1.1rem;
+}
+
+.custom-toolbar {
+  background-color: #163334;
+  /*background-color: #1c0c5e;*/
+  color: white;
+}
+
+.donors-section mat-list-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.donation-detail {
+  font-size: 0.85rem;
+  color: rgba(0, 0, 0, 0.6);
+  font-style: italic;
+}
+
+
+
+
+
+
+
+.progress-percent {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #3f51b5;
+}
+
+.value-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.value-icon mat-icon {
+  color: white;
+  background: #3f51b5;
+  border-radius: 50%;
+  padding: 8px;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.value-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.valor-arrecadado {
+  color: #4caf50;
+}
+
+.valor-meta {
+  color: #3f51b5;
+}
+
+.doadores {
+  color: #ff4081;
+}
+
+.value-label {
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+}
+
+.button-row {
+  margin-top: 16px;
+}
+
+.donate-button {
+  padding: 10px 32px;
+  font-size: 1.1rem;
+  width: 100%;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .progress-container {
+    margin: 16px auto 0;
+  }
+  
+  .value-icon mat-icon {
+    font-size: 20px;
+    padding: 6px;
+  }
+  
+  .value-amount {
+    font-size: 1.3rem;
+  }
+  
+  .progress-percent {
+    font-size: 1.3rem;
+  }
+}
+
+
+.value-group {
+  max-width: 100%;
+  flex-grow: 1;
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+.progress-container {
+  width: 100px;
+  height: 100px;
+  margin-left: auto; /* empurra para a direita */
+  position: relative;
+}
+
+.progress-text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .progress-container {
+    margin: 16px auto 0;
+  }
+}
+
+
+
+.progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.linha-superior {
+  display: flex;
+  gap: 16px;
+}
+
+.grafico-direita {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.progress-container {
+  position: relative;
+  width: 180px;
+  height: 100px;
+}
+
+.progress-text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.progress-percent {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.progress-label {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.6);
+}

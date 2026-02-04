@@ -1,0 +1,47 @@
+.modal-content {
+  padding: 24px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+mat-form-field {
+  width: calc(100% - 16px);
+}
+
+button {
+  min-width: 100px;
+}
+
+
+.modal-content {
+  padding: 24px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  min-width: 100px;
+}
+
+mat-slide-toggle {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

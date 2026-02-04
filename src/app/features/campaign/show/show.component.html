@@ -1,0 +1,170 @@
+<div class="container">
+  <!-- Navbar melhorada -->
+   <app-header-top [Logado]="Logado"> </app-header-top>
+  <!--<mat-toolbar class="mat-elevation-z4 custom-toolbar">
+    <div class="toolbar-content" fxLayout="row" fxLayoutAlign="space-between center">
+      <a routerLink="/dashboard" class="logo-link">
+        <img src="assets/logo_bb.png" alt="Logo" class="logo" />
+      </a>
+      <div fxLayout="row" fxLayoutGap="16px">
+        <a *ngIf="Logado==false" mat-flat-button color="accent" routerLink="/create/donation">
+          <mat-icon>add_circle</mat-icon>
+          Criar Doação
+        </a>
+        <a *ngIf="Logado==false" mat-button routerLink="/auth/login" class="login-button" aria-label="Login">
+          <mat-icon>account_circle</mat-icon>
+          Login
+        </a>
+        <a *ngIf="Logado==false" mat-button routerLink="/auth/new-user" class="login-button" aria-label="Criar Conta">
+          <mat-icon>account_circle</mat-icon>
+          Criar Conta
+        </a>
+        <a *ngIf="Logado==true" mat-button routerLink="/auth/login" class="login-button" aria-label="Criar Conta">
+          <mat-icon>account_circle</mat-icon>
+          Sair
+        </a>
+      </div>
+    </div>
+  </mat-toolbar> -->
+
+  <!-- Conteúdo principal com card -->
+  <main class="main-content">
+    <div *ngIf="donation; else skeletonLoading">
+      <mat-card class="donation-card mat-elevation-z4">
+        <mat-card-header>
+          <mat-card-title class="donation-title">
+            {{ donation.name }}
+          </mat-card-title>
+          <mat-card-subtitle class="donation-subtitle">
+            <mat-chip-list>
+              <mat-chip color="primary" selected>{{ donation.area }}</mat-chip>
+            </mat-chip-list>
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutGap="16px" fxLayout.lt-md="column">
+
+            <!-- Imagem -->
+            <div fxFlex="50%" class="image-container">
+              <img mat-card-image [src]="getImageUrl(donation.img_caminho)" alt="{{ donation.name }}"
+                class="donation-image" />
+            </div>
+
+            <!-- Detalhes da doação -->
+            <div fxFlex="50%" fxLayout="column">
+              <div class="progress-section" fxLayout="column" fxLayoutGap="16px">
+
+                <!-- Linha: Arrecadado + Gráfico -->
+                <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.lt-md="column" class="linha-superior">
+                  <!-- Valor arrecadado -->
+                  <div fxFlex="80" class="value-item">
+                    <div class="value-icon"><mat-icon>trending_up</mat-icon></div>
+                    <div>
+                      <div class="value-amount valor-arrecadado">
+                        {{ valor_total| currency:'BRL':'symbol':'1.2-2' }}
+                      </div>
+                      <div class="value-label">Valor Arrecadado</div>
+                    </div>
+                    <!-- Gráfico -->
+                    <!-- <div class="progress-container">
+                      <mat-progress-spinner mode="determinate" [value]="calculateProgress()" diameter="100"
+                        color="accent">
+                      </mat-progress-spinner>
+                      <div class="progress-text-overlay">
+                        <span class="progress-percent">{{ calculateProgress() | number:'1.0-0' }}%</span>
+                        <span class="progress-label">% da meta alcançada</span>
+                      </div>
+                    </div> -->
+                  </div>
+
+                </div>
+
+                <!-- Meta -->
+                <div class="value-item">
+                  <div class="value-icon"><mat-icon>flag</mat-icon></div>
+                  <div>
+                    <div class="value-amount valor-meta">{{ donation.valor | currency:'BRL':'symbol':'1.2-2' }}</div>
+                    <div class="value-label">Meta da Campanha</div>
+                  </div>
+                </div>
+
+                <!-- Doadores -->
+                <div class="value-item">
+                  <div class="value-icon"><mat-icon>people</mat-icon></div>
+                  <div>
+                    <div class="value-amount doadores">{{ total_doadores || 0 }}</div>
+                    <div class="value-label">Pessoas já doaram</div>
+                  </div>
+                </div>
+
+                <!-- Botão de doar -->
+                <div class="button-row">
+                  <button mat-raised-button color="accent" class="donate-button" aria-label="Doar Agora"
+                    (click)="openDonationModal()">
+                    <mat-icon>favorite</mat-icon>
+                    Doar Agora
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Descrição -->
+          <mat-divider class="divider"></mat-divider>
+          <div class="description-section">
+            <h3 class="section-title">Sobre esta causa</h3>
+            <div class="donation-text" [innerHTML]="donation.texto"></div>
+          </div>
+
+          <!-- Organizador  -->
+          <mat-divider class="divider"></mat-divider>
+          <div class="creator-section" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+            <img mat-card-avatar [src]="profileImageUrl || 'assets/default-user.png'" alt="Criador"
+              class="creator-avatar" />
+            <div fxLayout="column">
+              <span class="creator-label">Organizador</span>
+              <span class="creator-name">{{ usuario.name || 'Usuário Desconhecido' }}</span>
+              <span class="creator-label">{{ usuario.date_create }}</span>
+            </div>
+          </div>
+
+          <!-- Mensagens dos doadores -->
+          <mat-divider class="divider" *ngIf="mensagens?.length"></mat-divider>
+          <div class="donors-section" *ngIf="mensagens?.length">
+            <h3 class="section-title">Mensagens dos Doadores</h3>
+            <mat-list>
+              <mat-list-item *ngFor="let m of mensagens">
+                <mat-icon matListIcon>message</mat-icon>
+                <div matLine>{{ m.anonimo ? 'Anônimo' : m.nome }}</div>
+                <div matLine class="donation-detail">
+                  "{{ m.mensagem }}" – {{ m.valor | currency:'BRL' }} • {{ calculateDaysAgo(m.data_criacao) }} dias
+                  atrás
+                </div>
+              </mat-list-item>
+            </mat-list>
+            <button mat-button color="primary" class="show-more">
+              Buscar mais mensagens
+            </button>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </main>
+
+  <!-- Skeleton Loading -->
+  <ng-template #skeletonLoading>
+    <mat-card class="donation-card mat-elevation-z2">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Carregando informações da doação...</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+</div>
